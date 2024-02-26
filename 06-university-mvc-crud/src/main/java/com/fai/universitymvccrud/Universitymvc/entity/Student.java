@@ -2,6 +2,9 @@ package com.fai.universitymvccrud.Universitymvc.entity;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "student")
@@ -12,7 +15,19 @@ public class Student {
     public int id;
 
     @Column(name = "first_name")
+    @NotNull(message = "First name is required")
+    @Size(min = 1,message = "First name is required")
     public String firstName;
+    @Column(name = "last_name")
+    @NotNull(message = "Last name is required")
+//    @Size(min = 1,message = "Last name is required")
+    public String lastName;
+
+    @Column(name = "email")
+    @NotNull(message = "Email is required")
+    @Size(min = 1,message = "Email is required")
+    @Email(message = "Email is not format")
+    public String email;
     // When save action from a Form, it call setter
     // When render page, it call getter
     // Should create getter and setter for Entity
@@ -48,11 +63,7 @@ public class Student {
         this.email = email;
     }
 
-    @Column(name = "last_name")
-    public String lastName;
 
-    @Column(name = "email")
-    public String email;
     public Student(){
 
     }
